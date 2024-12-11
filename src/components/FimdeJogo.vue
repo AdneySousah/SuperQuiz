@@ -23,7 +23,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background-color: #89c454;
+        background-color: #5481c4;
         color: #30863d;
     }
 

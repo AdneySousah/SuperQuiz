@@ -1,19 +1,34 @@
 <template>
-	<div id="app">
-		<p id="vidas">Vidas = {{ vidas }}</p>
-		
-		<h1>Super Quiz</h1>
-		<QuizQuestion v-if="questionMode"
-		:question="questions[currentQuestion]"
-		@answered="showResult"/>
-		<QuizResult v-else-if="!showGameOver && !questionMode" class="animate__animated animate__heartBeat" :result="QuizResult" 
-			@confirmed="nextQuestion"/>
-
-		
-		<FimdeJogo class="animate__animated animate__hinge" v-if="showGameOver"/>
-		<button class="btn animate__animated animate__backInRight" v-if="showGameOver" @click="reiniciar">Reiniciar partida</button>
 	
+	<div >
+		<div  class="parabensFim animate__animated animate__bounceIn" v-if="questoes === 15">
+
+			<p>Parabens voce acertou o maximo de questões : {{ questoes }}</p>
 		
+			<button class="btn animate__animated animate__backInRight"  @click="reiniciar">Começar novamente</button>
+
+		</div>
+		
+			<div v-else id="app">
+			<p id="vidas">Vidas = {{ vidas }}</p>
+			<p id="questoes">Questoes acertadas = </p><p id="questoesNumero" v-if="QuizResult || !QuizResult" >{{ questoes }}</p>
+			
+			<h1>Super Quiz</h1>
+			<QuizQuestion v-if="questionMode"
+			:question="questions[currentQuestion]"
+			@answered="showResult"/>
+			<QuizResult v-else-if="!showGameOver && !questionMode" class="animate__animated animate__heartBeat" :result="QuizResult" 
+				@confirmed="nextQuestion"/>
+
+			
+			<FimdeJogo class="animate__animated animate__hinge" v-if="showGameOver"/>
+			<button class="btn animate__animated animate__backInRight" v-if="showGameOver" @click="reiniciar">Reiniciar partida</button>
+			
+			<div  class="parabens animate__animated animate__bounceOutUp" v-if="questoes === 5">Parabens voce acertou {{ questoes }} questões</div>
+			<div  class="parabens animate__animated animate__bounceOutUp" v-if="questoes === 10">Parabens voce acertou {{ questoes }} questões</div>
+			
+			<br>
+		</div>
 	</div>
 </template>
 
@@ -32,7 +47,9 @@ export default {
 			questions,
 			currentQuestion:0,
 			vidas:5,
-			showGameOver:false
+			showGameOver:false,
+			questoes:0,
+			random:[]
 		}
 	},
 	methods:{
@@ -44,7 +61,10 @@ export default {
 		nextQuestion(){
 			
 			let r = Math.random()* this.questions.length
+			
+
 			this.currentQuestion = parseInt(r)
+			this.random.push(this.currentQuestion)
 			this.questionMode = true
 			
 			
@@ -52,7 +72,11 @@ export default {
 		PerdeVida(){
 			
 			if(this.QuizResult == false){
+				
 				this.vidas -=1
+			}
+			if(this.QuizResult == true){
+				this.questoes +=1
 			}
 			if(this.vidas ==0){
 				this.showGameOver = true
@@ -75,6 +99,36 @@ body {
 	color: #FFF;
 	height: 100vh;
 }
+
+.parabens{
+		position: absolute;
+		height: 400px;
+        color: #000;
+        background-color: #FFF;
+        width: 70%;
+        border-radius: 20px;
+        font-size: 2.5rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+}
+.parabensFim{
+		height: 400px;
+        color: #000;
+        background-color: #FFF;
+        width: 70%;
+        border-radius: 20px;
+        font-size: 2.5rem;
+		position: relative;
+		margin: 300px 250px;
+		text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+		
+}
+
 .btn{
 	padding: 10px 20px;
 	margin: 15px;
@@ -96,6 +150,20 @@ body {
 	position: absolute;
 	left: 0;
 	margin: 50px 200px;
+	
+}
+#questoes{
+	font-size: 1.5rem;
+	position: absolute;
+	left: 0;
+	margin: 80px 200px;
+	
+}
+#questoesNumero{
+	font-size: 1.5rem;
+	position: absolute;
+	left: 0;
+	margin: 80px 450px;
 	
 }
 
@@ -132,4 +200,10 @@ body {
 .flip-leave-active {
 	animation: flip-out 0.3s ease;
 }
+.animate__bounceOutUp{
+	
+	animation-duration: 2s;
+}
+
+
 </style>

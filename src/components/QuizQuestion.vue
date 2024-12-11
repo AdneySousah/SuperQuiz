@@ -4,11 +4,17 @@
         
         <span>{{ question.text }}</span>
         <ul class="answers">
-            <li v-for="(answer,i) in question.answers" :key="answer.text" @click="$emit('answered',answer.correct)">
+            <li v-for="(answer,i) in question.answers" :key="answer.text" @click="$emit('answered',answer.correct) ">
                 <span class="number">{{ i + 1 }}</span>
                 <span class="text">{{ answer.text }}</span>
+                
             </li>
+            
         </ul>
+        <span class="text" v-if="question.difficulty == 1">Dificuldade da questão: 😀</span>
+        <span class="text" v-if="question.difficulty == 2">Dificuldade da questão: 😐</span>
+        <span class="text" v-if="question.difficulty == 3">Dificuldade da questão: 🤔</span>
+        
     </div>
 </template>
 
@@ -19,7 +25,8 @@ export default {
             type:Object,
             required:true
         }
-    }
+    },
+
     
 }
 </script>
