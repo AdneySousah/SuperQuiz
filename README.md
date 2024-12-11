@@ -1,24 +1,12 @@
-# questions
+# Super Questions 🎮  
 
-## Project setup
-```
-npm install
-```
+**Super Questions** é um jogo de perguntas e respostas com múltipla escolha, desenvolvido para proporcionar aprendizado e diversão de forma interativa!  
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 🧩 Funcionalidades  
+- Apresenta uma pergunta com 4 opções de resposta.  
+- Sistema de **vidas**: o jogador começa com 5 vidas.  
+- **Game Over**: ao perder todas as vidas, o jogo termina com uma tela de fim de jogo.  
+- Opção de reiniciar o jogo com um clique.  
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 🚀 Tecnologias Utilizadas  
+Vue JS
