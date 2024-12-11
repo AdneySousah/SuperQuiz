@@ -10,3 +10,5 @@
 
 ## 🚀 Tecnologias Utilizadas  
 Vue JS
+
+## Codigo não responsivo
